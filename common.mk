@@ -16,6 +16,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 # Get non-open-source specific aspects
 $(call inherit-product, vendor/samsung/sm8250-common/sm8250-common-vendor.mk)
 
+# AOSP Recovery
+TARGET_USES_AOSP_RECOVERY := true
+
 # Additional native libraries
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
@@ -187,7 +190,7 @@ PRODUCT_PACKAGES += \
     init.samsung.rc \
     init.target.rc \
     init.udfps.rc \
-    init.y2q.rc \
+    init.r8q.rc \
     ueventd.qcom.rc
 
 # Component overrides
@@ -199,9 +202,9 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.capabilityconfigstore@1.0
 
 # Consumer IR
-PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-impl \
-    android.hardware.ir@1.0-service.samsung
+#PRODUCT_PACKAGES += \
+#    android.hardware.ir@1.0-impl \
+#    android.hardware.ir@1.0-service.samsung
 
 # Cryptfs
 PRODUCT_PACKAGES += \
@@ -308,8 +311,8 @@ PRODUCT_PACKAGES += \
     fastbootd
 
 # FastCharge
-PRODUCT_PACKAGES += \
-    vendor.lineage.fastcharge@1.0-service.samsung
+#PRODUCT_PACKAGES += \
+#    vendor.lineage.fastcharge@1.0-service.samsung
 
 # Fingerprint
 PRODUCT_PACKAGES += \
@@ -348,7 +351,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libhidltransport \
     libhidltransport.vendor \
-    libhwbinder \
+    libhwbinder \	
     libhwbinder.vendor
 
 # HotwordEnrollement app permissions
@@ -356,8 +359,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml
 
 # Imsservice
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/broadcast_allowlist.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/broadcast_allowlist.xml
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/configs/broadcast_allowlist.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/broadcast_allowlist.xml
 
 # Input
 PRODUCT_COPY_FILES += \
@@ -529,8 +532,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_PRODUCT)/vendor_overlay/$(PLATFORM_VNDK_VERSION)/etc/powerhint.json
 
 # PowerShare
-PRODUCT_PACKAGES += \
-    vendor.lineage.powershare@1.0-service.samsung
+#PRODUCT_PACKAGES += \
+#    vendor.lineage.powershare@1.0-service.samsung
 
 # Properties
 -include $(LOCAL_PATH)/default_prop.mk
@@ -606,17 +609,17 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.systemhelper@1.0.vendor
 
 # Telephony
-PRODUCT_PACKAGES += \
-    ims-ext-common \
-    ims_ext_common.xml \
-    qti-telephony-hidl-wrapper \
-    qti_telephony_hidl_wrapper.xml \
-    qti-telephony-utils \
-    qti_telephony_utils.xml \
-    telephony-ext
+#PRODUCT_PACKAGES += \
+#    ims-ext-common \
+#    ims_ext_common.xml \
+#    qti-telephony-hidl-wrapper \
+#    qti_telephony_hidl_wrapper.xml \
+#    qti-telephony-utils \
+#    qti_telephony_utils.xml \
+#    telephony-ext
 
-PRODUCT_BOOT_JARS += \
-    telephony-ext
+#PRODUCT_BOOT_JARS += \
+#    telephony-ext
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/privapp-permissions-qti.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-qti.xml
@@ -630,8 +633,8 @@ PRODUCT_PACKAGES += \
     vendor.lineage.touch@1.0-service.samsung
 
 # Trust
-PRODUCT_PACKAGES += \
-    vendor.lineage.trust@1.0-service
+#PRODUCT_PACKAGES += \
+#    vendor.lineage.trust@1.0-service
 
 # USB
 PRODUCT_PACKAGES += \

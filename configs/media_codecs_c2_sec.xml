@@ -57,23 +57,19 @@
             <Limit name="channel-count" max="2" />
             <Limit name="sample-rate" ranges="8000-48000" />
             <Limit name="bitrate" range="5000-384000" />
-        </MediaCodec>	
+        </MediaCodec>
         <MediaCodec name="c2.sec.vc1.decoder" rank="1">
             <Type name="video/wvc1">
-                <Limit name="size" min="32x32" max="2048x2048" />
+                <Limit name="size" min="32x32" max="1920x1088" />
             </Type>
             <Type name="video/x-ms-wmv">
-                <Limit name="size" min="32x32" max="2048x2048" />
+                <Limit name="size" min="32x32" max="1920x1088" />
             </Type>
             <Quirk name="decoder-ignores-streamcorrupt-error" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="block-count" range="1-16384" />
         </MediaCodec>
         <MediaCodec name="c2.sec.mpeg4.decoder" type="video/mp4v-es">
-            <Limit name="size" min="32x32" max="1920x1920" />
+            <Limit name="size" min="32x32" max="1920x1088" />
             <Quirk name="decoder-ignores-streamcorrupt-error" />
-            <Limit name="block-size" value="16x16" />
-            <Limit name="block-count" range="1-8160" />
             <!-- measured [548-558] lower-upper [140-1487] median * 1.5 [829] -->
             <Limit name="measured-frame-rate-176x144" range="307-676" />
             <!-- measured [457-471] lower-upper [117-1249] median * 1.5 [696] -->
@@ -83,10 +79,11 @@
         </MediaCodec>
     </Decoders>
     <Encoders>
-        <MediaCodec name="c2.sec.aac.encoder" type="audio/mp4a-latm" rank="16">
+        <MediaCodec name="c2.sec.aac.encoder" type="audio/mp4a-latm" rank="1">
             <Limit name="channel-count" max="6" />
             <Limit name="sample-rate" ranges="8000-96000" />
             <Limit name="bitrate" range="8000-960000" />
         </MediaCodec>
     </Encoders>
 </MediaCodecs>
+

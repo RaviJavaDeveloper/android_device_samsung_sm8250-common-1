@@ -42,7 +42,7 @@ on init
 
     # Change backlog queue size
     write /proc/sys/net/core/netdev_max_backlog 100000
-
+	
 # Create carrier folder for HiddenMenu
 on post-fs
     mkdir /efs/carrier 0755 system system

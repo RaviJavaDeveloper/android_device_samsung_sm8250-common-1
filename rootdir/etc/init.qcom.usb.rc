@@ -526,6 +526,7 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=mtp,categories,conn_g
     symlink /config/usb_gadget/g1/functions/ss_mon.mtp /config/usb_gadget/g1/configs/b.1/f5
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
+#]
 
 on property:sys.usb.config=ptp && property:sys.usb.configfs=1
     rm /config/usb_gadget/g1/configs/b.1/f1

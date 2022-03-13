@@ -1,5 +1,5 @@
 # Samsung Specific Properties
-ro.build.PDA=SC52AOMU1CVB1
+ro.build.PDA=G781BXXS4DVA2
 ro.build.official.release=true
 ro.build.2ndbrand=false
 ro.config.rm_preload_enabled=1

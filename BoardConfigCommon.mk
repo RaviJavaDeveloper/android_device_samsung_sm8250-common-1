@@ -65,7 +65,7 @@ TARGET_ENABLE_MEDIADRM_64 := true
 
 # DTB
 BOARD_BOOT_HEADER_VERSION := 2
-BOARD_BOOT_HEADER_NAME := SRPSI26B001
+BOARD_BOOT_HEADER_NAME := SRPTG02C004
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_MKBOOTIMG_ARGS += --board $(BOARD_BOOT_HEADER_NAME)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
@@ -95,7 +95,7 @@ DEVICE_MATRIX_FILE += $(COMMON_PATH)/compatibility_matrix.xml
 
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 androidboot.usbcontroller=a600000.dwc3 swiotlb=2048 printk.devkmsg=on firmware_class.path=/vendor/firmware_mnt/image loop.max_part=7
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 androidboot.usbcontroller=a600000.dwc3 swiotlb=2048 printk.devkmsg=on firmware_class.path=/vendor/firmware_mnt/image androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_PAGESIZE := 4096
 TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc
@@ -128,8 +128,7 @@ TARGET_COPY_OUT_PRODUCT := product
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
 
 ### SYSTEM_EXT
-BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
-TARGET_COPY_OUT_SYSTEM_EXT := system_ext
+TARGET_COPY_OUT_SYSTEM_EXT := system/system_ext
 
 ### USERDATA
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -140,13 +139,12 @@ BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
 
 ### Dynamic Partitions
-BOARD_SAMSUNG_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system system_ext vendor
+BOARD_SAMSUNG_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system vendor
 BOARD_SUPER_PARTITION_GROUPS := samsung_dynamic_partitions
 
 ifneq ($(WITH_GMS),true)
 BOARD_PRODUCTIMAGE_EXTFS_INODE_COUNT := -1
 BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := -1
-BOARD_SYSTEM_EXTIMAGE_EXTFS_INODE_COUNT := -1
 endif
 
 # Platform

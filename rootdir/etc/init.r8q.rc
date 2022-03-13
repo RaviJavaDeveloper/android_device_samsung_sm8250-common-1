@@ -33,11 +33,25 @@ on post-fs
     chown radio system /efs/carrier/HiddenMenu
 
 #mDNIe
-    mkdir /efs/afc 0750 system system
-    chmod 750 /efs/afc
-    chown system system /dev/mafpc
-    chmod 0660 /dev/mafpc
+	mkdir /efs/afc 0750 system system
+	chmod 750 /efs/afc
+	chown system system /dev/mafpc
+	chmod 0660 /dev/mafpc
     exec - system system -- /system/bin/mafpc_write
+
+# Fingerprint sensor
+    chmod 0660 /dev/goodix_fp
+    
+    chown system system /dev/goodix_fp
+    chown system radio /sys/class/fingerprint/fingerprint/type_check
+    chown system radio /sys/class/fingerprint/fingerprint/name
+    chown system radio /sys/class/fingerprint/fingerprint/vendor
+    chown system radio /sys/class/fingerprint/fingerprint/adm
+    chown system radio /sys/class/fingerprint/fingerprint/bfs_values
+    chown system radio /sys/class/fingerprint/fingerprint/rb
+    
+    mkdir /efs/biometrics 0770 system system
+    mkdir /efs/biometrics/meta 0770 system system
 
 on post-fs-data
     # Samsung Pay
@@ -104,6 +118,12 @@ on property:ro.boot.carrierid=TMK
     setprop ssu.support 1
 on property:ro.boot.carrierid=VZW
     setprop ssu.support 1
+on property:ro.boot.carrierid=AIO
+    setprop ssu.support 1
+on property:ro.boot.carrierid=USC
+    setprop ssu.support 1
+on property:ro.boot.carrierid=CCT
+    setprop ssu.support 1
 
 on init
 # setup cgroup freezer for freecess
@@ -145,7 +165,13 @@ on init
 
 on boot
 # SSWAP
-    write /proc/sys/vm/swappiness 130
+    write /proc/sys/vm/swappiness 160
+
+# Performance
+    chmod 0664 /dev/cpuset/restricted/cpus
+    write /dev/cpuset/restricted/cpus 0-7
+    chmod 0664 /sys/class/devfreq/soc:qcom,cpu4-cpu-ddr-latfloor/min_freq
+    chown root system /sys/class/devfreq/soc:qcom,cpu4-cpu-ddr-latfloor/min_freq
 
 # SDHMS Slowdown : Cpuset
     mkdir /dev/cpuset/abnormal
@@ -168,6 +194,10 @@ on boot
     chmod 0664 /dev/cpuset/moderate/tasks
     chmod 0664 /dev/cpuset/moderate/cpus
 
+#Performance
+    chmod 0664 /dev/cpuset/restricted/cpus
+    write /dev/cpuset/restricted/cpus 0-7
+
 # Pageboostd
 on property:sys.boot_completed=1
     start pageboostd
@@ -178,19 +208,6 @@ service pageboostd /system/bin/pageboostd
     group system mount radio net_bt sdcard_rw shell media media_rw
     socket pageboostd seqpacket 0660 system system
     disabled
-
-# HEIMDALL
-on early-init
-    chmod 0777 /dev/memcg
-    chown system system /dev/memcg
-    chown system system /dev/memcg/cgroup.procs
-
-service heimdalld /system/bin/heimdalld
-    class core
-    user system
-    group system readproc
-    capabilities NET_ADMIN SYS_NICE KILL CHOWN
-    oneshot
 
 # some priv-apps of SPR bind mount to TMB priv-apps
 on post-fs-data && property:ro.csc.sales_code=TMB
@@ -206,19 +223,14 @@ on post-fs-data && property:ro.csc.sales_code=TMB
     umount /mnt/temp
     rmdir /mnt/temp
 
-# DCK properties based on target
-# DigitalKey (Supported Country) : EUR, KOR, USA, CAN, SEA/Oceania
-on property:sys.boot_completed=1 && property:ro.csc.countryiso_code=KR
-    setprop ro.gms.dck.eligible_wcc 1
-on property:sys.boot_completed=1 && property:ro.csc.countryiso_code=US
-    setprop ro.gms.dck.eligible_wcc 1
-on property:sys.boot_completed=1 && property:ro.csc.countryiso_code=GB
-    setprop ro.gms.dck.eligible_wcc 1
-on property:sys.boot_completed=1 && property:ro.csc.countryiso_code=DE
-    setprop ro.gms.dck.eligible_wcc 1
-on property:sys.boot_completed=1 && property:ro.csc.countryiso_code=FR
-    setprop ro.gms.dck.eligible_wcc 1
-on property:sys.boot_completed=1 && property:ro.csc.countryiso_code=IT
-    setprop ro.gms.dck.eligible_wcc 1
-on property:sys.boot_completed=1 && property:ro.csc.countryiso_code=ES
-    setprop ro.gms.dck.eligible_wcc 1
+# some priv-apps of DSH bind mount to DSA priv-apps
+on post-fs-data && property:ro.csc.sales_code=DSA
+    umount /system/carrier
+    mkdir /mnt/temp
+    mount none /system/carrier/DSH /mnt/temp bind
+    mount none /system/carrier/DSA /system/carrier bind
+    mount none /mnt/temp/priv-app/MyAccountDsh /system/carrier/priv-app/MyAccountDsh bind
+    mount none /mnt/temp/priv-app/VisualVoicemailDsh_Stub /system/carrier/priv-app/VisualVoicemailDsh_Stub bind
+    umount /mnt/temp
+    rmdir /mnt/temp
+
