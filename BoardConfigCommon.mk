@@ -85,7 +85,7 @@ TARGET_SEC_FP_CALL_NOTIFY_ON_CANCEL := true
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
     $(COMMON_PATH)/device_framework_matrix.xml \
     $(COMMON_PATH)/samsung_device_framework_matrix.xml \
-    vendor/lineage/config/device_framework_matrix.xml
+    vendor/aosp/config/device_framework_matrix.xml
 # specifies which HAL versions the vendor image provides
 DEVICE_MANIFEST_FILE += \
     $(COMMON_PATH)/manifest.xml \
@@ -167,6 +167,7 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(COMMON_PATH)/releasetools
 
 # RIL
 ENABLE_VENDOR_RIL_SERVICE := true
+BOARD_PROVIDES_LIBRIL := true
 TARGET_USES_VND_SECRIL := true
 
 # Root
