@@ -1,6 +1,9 @@
 ### BLUETOOTH
 sys.bluetooth.tty                            u:object_r:exported_bluetooth_prop:s0
 
+### BUILD
+ro.build.PDA                                 u:object_r:exported2_default_prop:s0
+
 ### CAMERA
 system.camera.CC.                            u:object_r:exported_camera_prop:s0
 service.camera.                              u:object_r:exported_camera_prop:s0
@@ -20,10 +23,13 @@ persist.sys.omc_etcpath                      u:object_r:exported_config_prop:s0
 ro.omc.                                      u:object_r:exported_config_prop:s0
 
 ### RADIO
-ril.NwNmId                                   u:object_r:telephony_config_prop:s0
-ril.NwNmId2                                  u:object_r:telephony_config_prop:s0
-ro.boot.cpboot                               u:object_r:telephony_config_prop:s0
-ro.simbased.changetype                       u:object_r:telephony_config_prop:s0
+ril.NwNmId                                   u:object_r:exported_radio_prop:s0
+ril.NwNmId2                                  u:object_r:exported_radio_prop:s0
+ro.boot.cpboot                               u:object_r:exported_radio_prop:s0
+ro.simbased.changetype                       u:object_r:exported_config_prop:s0
 
 ### RFKILL
 ro.rfkilldisabled                            u:object_r:rfkilldisabled_prop:s0
+
+### other properties
+ro.factory.factory_binary                    u:object_r:vendor_factory_prop:s0

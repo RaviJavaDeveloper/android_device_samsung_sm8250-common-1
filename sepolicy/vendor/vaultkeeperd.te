@@ -1,14 +1,14 @@
 type vaultkeeperd, domain;
 type vaultkeeperd_exec, exec_type, file_type, vendor_file_type;
 
-init_daemon_domain(vaultkeeperd);
+init_daemon_domain(vaultkeeperd)
 
-hwbinder_use(vaultkeeperd);
-vndbinder_use(vaultkeeperd);
+hwbinder_use(vaultkeeperd)
+vndbinder_use(vaultkeeperd)
 
-get_prop(vaultkeeperd, exported_system_prop);
-get_prop(vaultkeeperd, hwservicemanager_prop);
-set_prop(vaultkeeperd, vendor_sec_vaultkeeper_prop);
+get_prop(vaultkeeperd, exported_system_prop)
+get_prop(vaultkeeperd, hwservicemanager_prop)
+set_prop(vaultkeeperd, vendor_sec_vaultkeeper_prop)
 
 allow vaultkeeperd efs_file:dir { ioctl read write getattr lock open watch watch_reads add_name search };
 allow vaultkeeperd kernel:system syslog_read;

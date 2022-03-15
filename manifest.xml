@@ -75,12 +75,14 @@
     <hal format="hidl" override="true">
         <name>android.hardware.gatekeeper</name>
         <transport>hwbinder</transport>
-        <impl level="generic"></impl>
         <version>1.0</version>
         <interface>
             <name>IGatekeeper</name>
             <instance>default</instance>
+            <instance>mdfpp</instance>
         </interface>
+        <fqname>@1.0::IGatekeeper/default</fqname>
+        <fqname>@1.0::IGatekeeper/mdfpp</fqname>
     </hal>
     <hal format="hidl" override="true">
         <name>android.hardware.media.c2</name>

@@ -7,6 +7,8 @@
 # Enable updating of APEXes
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
+PRODUCT_COMPRESSED_APEX := false
+
 # Include GSI keys
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
@@ -212,7 +214,7 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.cryptfshw@1.0
 
 # Dex
-PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := verify
+#PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := verify
 
 # Display
 PRODUCT_PACKAGES += \
@@ -320,10 +322,10 @@ PRODUCT_PACKAGES += \
     fingerprint.default
 
 # Gatekeeper
-PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0-impl \
-    android.hardware.gatekeeper@1.0-service \
-    android.hardware.gatekeeper@1.0.vendor
+#PRODUCT_PACKAGES += \
+#    android.hardware.gatekeeper@1.0-impl \
+#    android.hardware.gatekeeper@1.0-service \
+#    android.hardware.gatekeeper@1.0.vendor
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -659,7 +661,9 @@ PRODUCT_COPY_FILES += \
     vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
 
 # VNDK
-PRODUCT_EXTRA_VNDK_VERSIONS := 28 29 30
+PRODUCT_EXTRA_VNDK_VERSIONS := 30
+PRODUCT_USE_PRODUCT_VNDK_OVERRIDE := true
+TARGET_USES_CUSTOM_AVB_KEY := true
 
 # WiFi
 PRODUCT_PACKAGES += \

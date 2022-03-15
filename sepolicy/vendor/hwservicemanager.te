@@ -1,1 +1,1 @@
-binder_call(hwservicemanager, vaultkeeperd);
+binder_call(hwservicemanager, vaultkeeperd)

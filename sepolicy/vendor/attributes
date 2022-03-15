@@ -7,5 +7,9 @@ attribute hal_sec_inputdev;
 attribute hal_sec_inputdev_client;
 attribute hal_sec_inputdev_server;
 
+attribute hal_param;
+attribute hal_param_client;
+attribute hal_param_server;
+
 # MISC
 attribute efs_type;

@@ -101,6 +101,8 @@ BOARD_KERNEL_PAGESIZE := 4096
 TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc
 TARGET_KERNEL_ADDITIONAL_FLAGS += HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument"
 TARGET_KERNEL_SOURCE := kernel/samsung/sm8250
+TARGET_KERNEL_CLANG_COMPILE := true
+
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
